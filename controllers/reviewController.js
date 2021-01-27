@@ -23,7 +23,7 @@ router.post('/', validateSession, (req, res) => {
     }
     Review.create(reviewEntry)
         .then(review => res.status(200).json(review))
-        .catch(err => res.status(500).json({ error: err }))
+        .catch(err => res.status(500).jsreviewon({ error: err }))
 });
 
 /* ***************EDIT REVIEWS************** */

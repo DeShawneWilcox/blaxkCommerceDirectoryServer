@@ -16,9 +16,9 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        businessfuction: {
+        businessFunction: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         }
     });
 

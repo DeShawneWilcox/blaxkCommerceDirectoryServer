@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const Business = require('../db').import('../models/event');
+const Business = require('../db').import('../models/business');
 
 
 /* *********GET ALL BUSINESSES********* */
@@ -22,7 +22,7 @@ router.post('/', validateSession, (req, res) => {
         address: req.body.business.address,
         zipcode: req.body.business.zipcode,
         businessFunction: req.body.business.businessFunction,
-        owner: req.user.id
+        userId: req.user.id,
     }
     Business.create(businessEntry)
         .then(business => res.status(200).json(business))
@@ -33,14 +33,14 @@ router.post('/', validateSession, (req, res) => {
 
 router.put("/:id", validateSession, function (req, res) {
     const editBusinessEntry = {
-        businessOwner: req.body.business.owner,
+        businessOwner: req.body.business.businessOwner,
         businessName: req.body.business.businessName,
         address: req.body.business.address,
         zipcode: req.body.business.zipcode,
         businessFunction: req.body.business.businessFunction
     };
 
-const query = { where: { id: req.params.id, owner: req.user.id} };
+const query = { where: { id: req.params.id, userId: req.user.id} };
 
 Business.update(editBusinessEntry, query)
     .then(businesses => res.status(200).json({message: "Business successfully edited."}))
