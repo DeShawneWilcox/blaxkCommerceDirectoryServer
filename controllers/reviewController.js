@@ -19,11 +19,12 @@ router.post('/', validateSession, (req, res) => {
         title: req.body.review.title,
         entry: req.body.review.entry,
         owner: req.user.id,
+        businessId: req.body.review.businessid
 
     }
     Review.create(reviewEntry)
         .then(review => res.status(200).json(review))
-        .catch(err => res.status(500).jsreviewon({ error: err }))
+        .catch(err => res.status(500).json({ error: err }))
 });
 
 /* ***************EDIT REVIEWS************** */
@@ -51,17 +52,20 @@ router.delete("/delete/:id", validateSession, function (req, res) {
     .catch((err) => res.status(500).json({error: err }));
 });
 
-/* **************GET REVIEWS BY BUSINESSNAME*************** */
+/* **************GET REVIEWS BY BUSINESS*************** */
 
-router.get('/:businessname', function (req, res) {
-    let businessName = req.params.businessName;
+router.get('/reviews/:businessId', function (req, res) {
+    // let businessid = req.params.business.id;
 
     Review.findAll({
-        where: {businessName: businessName }
+        where: {businessId: req.params.businessId }
     })
         .then(reviews => res.status(200).json(reviews))
         .catch(err => res.status(500).json({ error: err }))
 });
+
+
+
 
 
 module.exports = router;
