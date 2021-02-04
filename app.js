@@ -30,5 +30,7 @@ app.use('/event', eventController)
 
 
 
-app.listen(process.env.PORT, () => console.log(`The App is listening on port number: ${process.env.PORT}`));
+applicationCache.addEventListener(process.env.PORT, () => {
+    console.log(`server is listening on port ${process.env.PORT}.`)
+});
 
